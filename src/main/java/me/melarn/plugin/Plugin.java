@@ -8,7 +8,6 @@ public final class Plugin extends JavaPlugin {
     public void onEnable() {
         getCommand("get").setExecutor(new MessagesCMD());
         getCommand("get").setTabCompleter(new TabCompleter());
-
     }
 
     @Override

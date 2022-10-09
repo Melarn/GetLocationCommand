@@ -19,10 +19,10 @@ public class MessagesCMD implements CommandExecutor {
             }
 
             if (args[0].equalsIgnoreCase("location")) {
-                sender.sendMessage("Локация: " + player.getLocation());
+                sender.sendMessage(ChatColor.of(Color.PINK) + "Локация: " + player.getLocation());
                 return true;
             } else if (args[0].equalsIgnoreCase("world")) {
-                sender.sendMessage("Мир: " + player.getWorld());
+                sender.sendMessage(ChatColor.of(Color.PINK) + "Мир: " + player.getWorld());
                 return true;
             }
         }
