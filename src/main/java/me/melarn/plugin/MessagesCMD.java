@@ -1,6 +1,7 @@
 package me.melarn.plugin;
 
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,10 +20,20 @@ public class MessagesCMD implements CommandExecutor {
             }
 
             if (args[0].equalsIgnoreCase("location")) {
-                sender.sendMessage(ChatColor.of(Color.PINK) + "Локация: " + player.getLocation());
+
+                int BlockX = (player.getLocation().getBlockX());
+                int BlockY = (player.getLocation().getBlockY());
+                int BlockZ = (player.getLocation().getBlockZ());
+
+                sender.sendMessage(ChatColor.of(Color.PINK) + "Локация: " + ChatColor.of(Color.WHITE) +
+                        "\n" + "X: " + ChatColor.of(Color.RED) + BlockX +
+                        ChatColor.of(Color.WHITE) +
+                        "\n" + "Y: " + ChatColor.of(Color.GRAY) + BlockY +
+                        ChatColor.of(Color.WHITE) +
+                        "\n" + "Z: " + ChatColor.of(Color.cyan) + BlockZ);
                 return true;
             } else if (args[0].equalsIgnoreCase("world")) {
-                sender.sendMessage(ChatColor.of(Color.PINK) + "Мир: " + player.getWorld());
+                sender.sendMessage(ChatColor.of(Color.PINK) + "Мир: " + ChatColor.of(Color.LIGHT_GRAY) + player.getWorld());
                 return true;
             }
         }
