@@ -22,7 +22,6 @@ public final class Plugin extends JavaPlugin {
         getCommand("get").setExecutor(new MessagesCMD());
         getCommand("get").setTabCompleter(new TabCompleter());
         this.adventure = Audience.audience();
-//        getCommand("ukraine").setExecutor(new Component(this));
     }
 
     @Override
