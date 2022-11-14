@@ -2,4 +2,7 @@
 
 The command that show you location and world.
 
-Command: get
+Command: /get location.
+
+
+**Works only on Paper and forks.**
