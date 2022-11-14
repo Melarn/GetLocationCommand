@@ -14,14 +14,29 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class MessagesCMD implements CommandExecutor {
+
+    private final HashMap<UUID, Long> cooldown;
+
+    public MessagesCMD() {
+        this.cooldown = new HashMap<>();
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player player) {
             if (args.length < 1) {
-                sender.sendMessage(ChatColor.of(Color.PINK) + "No arguments!");
+                sender.sendMessage(ChatColor.of(Color.PINK) + "/<get> location");
                 return true;
+            }
+            if (!cooldown.containsKey(player.getUniqueId()) || System.currentTimeMillis() - cooldown.get(player.getUniqueId()) > 5000) {
+                cooldown.put(player.getUniqueId(), System.currentTimeMillis());
+            } else {
+                player.sendMessage(Component.text("Пожалуйста подождите 5 сек.").color((TextColor) new Color(204, 25, 25)));
+                return false;
             }
 
             if (args[0].equalsIgnoreCase("location")) {
@@ -29,6 +44,7 @@ public class MessagesCMD implements CommandExecutor {
                 int BlockY = (player.getLocation().getBlockY());
                 int BlockZ = (player.getLocation().getBlockZ());
 
+                player.sendMessage(Component.text(""));
                 String location = ChatColor.of(new Color(102, 167, 197)) + "Локация: " + ChatColor.of(Color.WHITE) +
                         "\n" + " X: " + ChatColor.of(new Color(206, 231, 251)) + BlockX +
                         ChatColor.of(Color.WHITE) +
@@ -51,10 +67,11 @@ public class MessagesCMD implements CommandExecutor {
                         .clickEvent(ClickEvent.suggestCommand("!" + result))
                         .hoverEvent(Component.text("Нажмите чтобы отправить сообщение")));
                 player.sendMessage(Component.text(""));
-
                 return true;
+
             } else if (args[0].equalsIgnoreCase("world")) {
                 return true;
+
             }
         }
         return true;

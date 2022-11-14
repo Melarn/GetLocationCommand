@@ -10,18 +10,10 @@ public final class Plugin extends JavaPlugin {
 
     private Audience adventure;
 
-    public @NonNull Audience audience() {
-        if(this.adventure == null) {
-            throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
-        }
-        return this.adventure;
-    }
-
     @Override
     public void onEnable() {
         getCommand("get").setExecutor(new MessagesCMD());
         getCommand("get").setTabCompleter(new TabCompleter());
-        this.adventure = Audience.audience();
     }
 
     @Override
